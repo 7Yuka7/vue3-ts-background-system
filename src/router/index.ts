@@ -3,6 +3,31 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/',
+    name: 'Home',
+    component: () => import(/* webpackChunkName: "Home" */ '../views/HomeView.vue'),
+    children:[
+      {
+        path:'goods',
+        name:'goods',
+        meta:{
+          isShow: true,
+          title:'商品列表'
+        },
+        component:() => import(/* webpackChunkName: "Goods" */ '../views/GoodsView.vue'),
+      },
+      {
+        path:'users',
+        name:'users',
+        meta:{
+          isShow:true,
+          title:'用户列表'
+        },
+        component:() => import(/* webpackChunkName: "Users" */ '../views/UserView.vue'),
+      }
+    ]
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import(/* webpackChunkName: "login" */ '../views/LoginView.vue')
