@@ -19,16 +19,22 @@ requests.interceptors.request.use((config)=>{
 //响应拦截器
 requests.interceptors.response.use(
     (res)=>{
-        const code:number = res.data.data.code
-        if(code !==200){
-            //说明返回数据错误
-            return Promise.reject(res.data.data)
+        //登录数据设置的不是很合理--需单独设置
+        if(res.data.data.code === 200){
+            return res.data.data
         }
 
-        return res.data.data
+        //其他接口走此处
+        const code:number = res.data.code
+        if(code !==200){
+            //说明返回数据错误
+            return Promise.reject(res.data)
+        }
+
+        return res.data
     },
     (err)=>{
-        console.log(err)
+        console.log('响应拦截器错误',err)
     }
 )
 

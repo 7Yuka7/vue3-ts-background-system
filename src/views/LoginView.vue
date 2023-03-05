@@ -66,7 +66,6 @@ export default defineComponent({
                 if (valid) {
                     // 在此处发送请求
                     let result = await reqLogin(data.ruleForm)
-                    console.log('result',result)
                     if(result.code === 200){
                         //成功--1.存Token 2.转跳
                         localStorage.setItem('token',result.token)

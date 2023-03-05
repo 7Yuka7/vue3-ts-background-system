@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, computed , watch } from 'vue'
+import { defineComponent, reactive, toRefs, computed , watch , onMounted} from 'vue'
 //引入接口
 import { reqGoodsList } from '@/request';
 //引入数据类型
@@ -35,14 +35,21 @@ export default defineComponent({
         //数据定义
         const data = reactive(new InitData())
 
-        //发送数据请求
-        reqGoodsList().then((res) => {
-            console.log('111')
-        }, (err) => {
-            //此处err读取到数据，因此使用err给data.list赋值
-            data.list = err
-            data.listOrigin = err
+        //挂载的时候,发送数据请求
+        onMounted(()=>{
+            getGoodsData()
         })
+
+        const getGoodsData = () => {
+            reqGoodsList().then((res) => {
+            //此处err读取到数据，因此使用err给data.list赋值
+                data.list = res.data
+                data.listOrigin = res.data
+            }, (err) => {
+                console.log(err)
+            })
+        }
+        
 
         //分页器功能
         const currentChange = (page: number) => {
@@ -77,7 +84,6 @@ export default defineComponent({
                         return item.title.includes(data.selectData.title)
                     })
                 }
-                console.log(arr)
 
 
                 if (data.selectData.introduce) {

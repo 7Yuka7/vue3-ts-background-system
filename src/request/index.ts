@@ -21,3 +21,19 @@ export const reqGoodsList = () => {
         method:'get'
     })
 }
+
+//用户列表接口
+export const reqUserList = () => {
+    return requests({
+        url:'/getUserList',
+        method:'get'
+    })
+}
+
+//角色列表接口
+export const reqRoleList = () => {
+    return requests({
+        url:'/getRoleList',
+        method:'get'
+    })
+}
