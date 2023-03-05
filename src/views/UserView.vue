@@ -79,7 +79,6 @@ export default defineComponent({
                 data.userList = result.data
                 //多存一遍
                 data.originUserList = result.data
-                console.log(data.userList)
             } catch (error) {
                 console.log('获取用户数据列表', error)
             }
@@ -135,7 +134,7 @@ export default defineComponent({
                 role: row.role.map(item => item.role),
                 userName: row.userName
             }
-            console.log(row)
+            // console.log(row)
         }
 
         //编辑确认--将active中的信息赋值到原本的列表中去--根据id去匹配

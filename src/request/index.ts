@@ -37,3 +37,11 @@ export const reqRoleList = () => {
         method:'get'
     })
 }
+
+//获取权限列表接口
+export const reqAuthority = () => {
+    return requests({
+        url:'/getAuthorityList',
+        method:'get'
+    })
+}
