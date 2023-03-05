@@ -3,7 +3,7 @@ import requests from "./request";
 //用来显示类型的接口
 import {LoginFormInt} from '../type/login'
 
-//定义接口
+//登录接口
 export const reqLogin = (data:LoginFormInt) =>{
     
     //返回响应体
@@ -11,5 +11,13 @@ export const reqLogin = (data:LoginFormInt) =>{
         url:'/login',
         method:'post',
         data
+    })
+}
+
+//请求商品列表接口
+export const reqGoodsList = () => {
+    return requests({
+        url:'/getGoodsList',
+        method:'get'
     })
 }

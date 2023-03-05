@@ -49,7 +49,6 @@ export default defineComponent({
     setup() {
         const router = useRouter()
         const list = router.getRoutes().filter(item => item.meta.isShow)
-        console.log(list)
 
         return {list}
     }
