@@ -6,6 +6,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: () => import(/* webpackChunkName: "Home" */ '../views/HomeView.vue'),
+    redirect:'/goods',
     children:[
       {
         path:'goods',
@@ -35,7 +36,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/RoleView.vue')
       },
       {
-        path:'authority',
+        path:'authority/:id/:authority',
         name:'authority',
         meta:{
           isShow:false,
@@ -55,6 +56,17 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+//设置路由守卫
+router.beforeEach((to,from,next)=>{
+  const token:string | null = localStorage.getItem('token')
+  //没登陆就转到登录页面
+  if(!token && to.path !== '/login'){
+    next('/login')
+  }else{
+    next()
+  }
 })
 
 export default router

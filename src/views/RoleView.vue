@@ -79,7 +79,7 @@ export default defineComponent({
                 name:'authority',
                 params:{
                     id:row.roleId,
-                    authority:row.authority
+                    authority:JSON.stringify(row.authority) 
                 }
             })
         }

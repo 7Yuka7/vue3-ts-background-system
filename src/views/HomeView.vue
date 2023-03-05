@@ -11,7 +11,7 @@
                         <h2>后台管理系统</h2>
                     </el-col>
                     <el-col :span="4">
-                        <el-button type="info" plain>退出登录</el-button>
+                        <el-button type="info" plain @click="logOut">退出登录</el-button>
                     </el-col>
                 </el-row>
             </el-header>
@@ -20,7 +20,7 @@
                 <!-- 侧边栏 -->
                 <el-aside width="200px">
                     <el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo"
-                        default-active="2" text-color="#fff" router>
+                        :default-active="active" text-color="#fff" router>
                         <!-- router开启路由模式，通过el-menu-item index来进行转跳 -->
 
                         <el-menu-item :index="item.path" v-for="item in list" :key="item.path">
@@ -43,14 +43,21 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useRouter } from 'vue-router';
+import { useRouter ,useRoute} from 'vue-router';
 
 export default defineComponent({
     setup() {
         const router = useRouter()
+        const route = useRoute()
         const list = router.getRoutes().filter(item => item.meta.isShow)
 
-        return {list}
+        //退出登录，就是清除token然后转跳到login页面
+        const logOut = () => {
+            localStorage.removeItem('token')
+            router.push('/login')
+        }
+
+        return {list,active:route.path,logOut}
     }
 })
 </script>
